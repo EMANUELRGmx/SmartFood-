@@ -54,7 +54,7 @@
                 <p class="prod-excerpt">{{producto.descripcion}}
                     <a id="prod-showdesc" class="prod-excerpt-more" href="#">read more</a></p>
                 <div class="prod-add">
-                    <form action="#" method="post">
+                    <form action="{% url 'smartFood:agregarCarrito' producto.id %}" method="post">
                         {% csrf_token %}
                         
                         <button type="submit" class="button"><i class="icon ion-android-cart"></i> Agregar al Carrito</button>
