@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <h1 style="color: white;" class="maincont-ttl">Carrito</h1>
+    <ul class="b-crumbs">
+        <li ><a style="color: rgb(201, 201, 201);" href="/">Home</a></li>
+        <li style="color: rgb(201, 201, 201);" >Carrito</li>
+    </ul>
+    <div class="page-styling">
+    <div class="woocommerce prod-litems section-list">
+        {% for key,value in request.session.cart.items %}
+             <article class="prod-li sectls">
+            <div class="prod-li-inner">
+                <a href="producto.html" class="prod-li-img">
+                    <img src="{{value.imagen}}" alt="">
+                </a>
+                <div class="prod-li-cont">
+                    <div class="prod-li-ttl-wrap">
+                        <p>
+                            <a href="#">{{value.categoria}}</a>
+                        </p>
+                        <h3><a href="producto.html"></a>{{value.nombre}}</h3>
+                    </div><!--
+            No Space
+            -->
+                    <div style="margin: 25px;" class="prod-li-prices">
+                        <div class="prod-li-price-wrap">
+                            <p>Precio</p>
+                            <p class="prod-li-price">${{value.precio}}</p>
+                        </div>
+                        <div class="prod-li-qnt-wrap">
+                            <p class="qnt-wrap prod-li-qnt">
+                                
+                                <input type="text" value="{{value.cantidad}}">
+                                
+                            </p>
+                        </div>
+                        <div style="text-align: left;" class="prod-li-total-wrap">
+                            <p>Total</p>
+                            <p class="prod-li-total">${{value.subtotal}}</p>
+                        </div>
+                    </div><!--
+        No Space
+        -->
+                </div>
+                <div class="prod-li-info">
+                    
+                    <p class="prod-li-add">
+                        <a href="{% url 'smartFood:eliminarProductoCarrito' value.producto_id %}" class="button hover-label prod-addbtn"><i
+                                class="icon ion-close-round"></i><span>Eliminar</span></a>
+                    </p>
+                    
+                </div>
+            </div>
+            <div class="page-styling prod-li-informations">
+        
+        
+            </div>
+            </article>
+        {% endfor %}
+    </div>
+
+
+    <div class="cart-actions">
+        
+        <div class="cart-collaterals">
+            <a href="{% url 'smartFood:limpiarCarrito' %}" style="margin:20px;" class="checkout-button button">Limpiar Carrito</a>
+            <a href="{% url 'smartFood:registrarPedido' %}" style="margin: 20px;" class="checkout-button button">Realizar Pedido</a>
+            <div class="order-total">
+                <p class="cart-totals-ttl">Total</p>
+                <p class="cart-totals-val">${{request.session.cartMontoTotal}}</p>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}
